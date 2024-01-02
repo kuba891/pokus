@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Transport</title>
+</head>
+<body>
+    <textarea id="namehtml"></textarea>
+    <br>
+    <textarea id="agehtml"></textarea>
+    <br>
+    <button id="sendhtml">Send Data</button>
+
+    <script>
+        document.getElementById("sendhtml").onclick = () => {
+            var name = document.getElementById("namehtml").value;
+            var age = document.getElementById("agehtml").value;
+
+            // Create an object with the data
+            var data = { name: name, age: age };
+
+            // Send data to the server using Fetch API
+            fetch('http://localhost:3000/submitData', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.text())
+            .then(responseText => console.log(responseText))
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
